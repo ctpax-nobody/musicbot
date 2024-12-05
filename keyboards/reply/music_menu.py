@@ -1,7 +1,7 @@
 from aiogram.utils.keyboard import ReplyKeyboardBuilder
 from aiogram.types import KeyboardButton
 
-builder = ReplyKeyboardBuilder
+builder = ReplyKeyboardBuilder()
 
 def music_category():
     builder.row(
