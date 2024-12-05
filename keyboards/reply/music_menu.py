@@ -1,9 +1,10 @@
 from aiogram.utils.keyboard import ReplyKeyboardBuilder
 from aiogram.types import KeyboardButton
 
-builder = ReplyKeyboardBuilder()
 
 def music_category():
+    builder = ReplyKeyboardBuilder()
+
     builder.row(
         KeyboardButton(text="Aralash musiqalar 🎵")
     )
