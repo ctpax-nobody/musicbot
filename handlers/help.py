@@ -5,4 +5,4 @@ from router import router
 
 @router.message(Command("help"))
 async def start(message: types.Message):
-    await message.answer("Bu command hali ishga tushurilmadi")
+    await message.reply("Bu command hali ishga tushurilmadi")
