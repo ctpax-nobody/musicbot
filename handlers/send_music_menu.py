@@ -1,14 +1,12 @@
-from aiogram.types import Message
+from aiogram.types import Message, ParseMode
 from aiogram import F
-from aiogram.types import ParseMode
-
 from router import router
 from keyboards.reply.music_menu import music_category
 
 @router.message(F.text == "Musiqalar menyusi 🎧")
 async def send_categoryes(message: Message):
     await message.answer(text="Kategoriyani tanlang", 
-                        reply_markup=music_category())
+                         reply_markup=music_category())
 
 @router.message(F.text == "Aralash musiqalar 🎵")
 async def send_random_music(message: Message):
