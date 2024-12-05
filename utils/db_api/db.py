@@ -11,13 +11,13 @@ class Database:
 
     def connect(self):
         return pymysql.Connection(
-            database=self.db_name,
-            user=self.db_user,
-            password=self.db_password,
-            host=self.db_host,
-            port=self.db_port,
-            cursorclass=pymysql.cursors.DictCursor
-        )
+                host="mysql.railway.internal",
+                user="root",  # MySQL foydalanuvchi nomi
+                password="MbEGoeFOApAJVFPYrYxECXJfLSqJErDt",  # MySQL paroli
+                database="railway",  # Ma'lumotlar bazasi nomi
+                port=3306  # MySQL server porti
+            )
+
 
     def execute(self, sql: str, params: tuple = (), commit=False, fetchone=False, fetchall=False) -> dict | list:
         database = self.connect()
