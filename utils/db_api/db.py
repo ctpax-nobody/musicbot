@@ -11,7 +11,7 @@ class Database:
 
     def connect(self):
         return pymysql.Connection(
-                host="${{RAILWAY_PRIVATE_DOMAIN}}",
+                host="mysql.railway.internal",
                 user="root",  # MySQL foydalanuvchi nomi
                 password="MbEGoeFOApAJVFPYrYxECXJfLSqJErDt",  # MySQL paroli
                 database="railway",  # Ma'lumotlar bazasi nomi
