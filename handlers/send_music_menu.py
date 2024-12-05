@@ -1,4 +1,5 @@
-from aiogram.types import Message, ParseMode
+from aiogram.types import Message
+from aiogram.enums.parse_mode import ParseMode
 from aiogram import F
 from router import router
 from keyboards.reply.music_menu import music_category
