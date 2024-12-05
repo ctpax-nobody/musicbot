@@ -3,7 +3,7 @@ from aiogram.types import KeyboardButton
 
 builder = ReplyKeyboardBuilder
 
-def music_menu():
+def music_category():
     builder.row(
         KeyboardButton(text="Aralash musiqalar 🎵")
     )
