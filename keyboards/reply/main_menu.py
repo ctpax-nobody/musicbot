@@ -12,3 +12,4 @@ def generate_main_menu():
         KeyboardButton(text="Musiqa qidirish 🔍"),
         KeyboardButton(text="Aloqa uchun 📞")
     )
+    return builder.as_markup(resize_keyboard=True)
