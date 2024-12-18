@@ -2,10 +2,16 @@ from aiogram.types import Message
 from aiogram import F
 from router import router
 from keyboards.reply.send_musics import sending_musics
+from keyboards.reply.music_menu import music_category
 
 # Musiqa fayllarini yuborish funksiyasi
 async def send_music_page(message: Message, start_id: int):
     musics_sent = 0
+
+    @router.message(F.text == "Musiqalar menyusi 🎧")
+    async def send_categoryes(message: Message):
+        await message.answer(text="Kategoriyani tanlang", 
+                         reply_markup=music_category())
 
     # Guruhdagi xabarlar tarixini olish
     async for msg in message.chat.iter_history():
