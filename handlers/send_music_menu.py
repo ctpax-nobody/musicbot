@@ -1,7 +1,7 @@
 from aiogram.types import Message
 from aiogram import F
 from router import router
-from keyboards.reply.music_menu import sending_musics
+from keyboards.reply.send_musics import sending_musics
 
 # Musiqa fayllarini yuborish funksiyasi
 async def send_music_page(message: Message, start_id: int):
