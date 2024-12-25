@@ -5,38 +5,40 @@ from keyboards.reply.send_musics import sending_musics
 from keyboards.reply.music_menu import music_category
 from keyboards.reply.main_menu import main_menu
 
-async def send_music_page(message: Message, start_id: int):
-    musics_sent = 0
-    skip_count = start_id
+GROUP_CHAT_ID = "-1001234567890"  # Guruh ID ni kiriting
+audio_list = []  # Guruhdan kelgan musiqalarni saqlash uchun ro'yxat
 
-    async for msg in message.chat.iter_history(reverse=True):
-        if skip_count > 0:
-            skip_count -= 1
-            continue
-        if musics_sent >= 10:
-            break
-        if msg.audio:
-            await message.answer_audio(audio=msg.audio.file_id)
-            musics_sent += 1
-
-    await message.answer("Musiqalar ro'yxati:", reply_markup=sending_musics())
-
+# Musiqa kategoriyalari menyusi
 @router.message(F.text == "Musiqalar menyusi 🎧")
 async def send_categoryes(message: Message):
-    await message.answer("Kategoriyani tanlang:", reply_markup=music_category())
+    await message.answer(
+        text="Kategoriyani tanlang:", 
+        reply_markup=music_category()
+    )
 
+# "Aralash musiqalar 🎵" tugmasi bosilganda barcha musiqalarni yuborish
 @router.message(F.text == "Aralash musiqalar 🎵")
 async def send_all_musics(message: Message):
-    await send_music_page(message, start_id=0)
+    global audio_list
 
-@router.message(F.text == "Keyingi 10 ta musiqa 🎵")
-async def send_next_music(message: Message):
-    await send_music_page(message, start_id=10)
+    if not audio_list:
+        await message.answer("Guruhdan hali musiqalar kelib tushmagan.")
+        return
 
-@router.message(F.text == "Olidingi 10 ta musiqa 🎵")
-async def send_previous_music(message: Message):
-    await send_music_page(message, start_id=0)
+    # Ro'yxatdagi musiqalarni yuborish (10 tadan)
+    batch = audio_list[:10]  # Dastlabki 10 ta musiqani oling
+    for audio_id in batch:
+        await message.answer_audio(audio_id)
 
-@router.message(F.text == "Ortga 🔙")
-async def go_back(message: Message):
-    await message.answer("Asosiy menyuga qaytdingiz.", reply_markup=main_menu())
+    # Yuborilgan musiqalarni ro'yxatdan o'chirish
+    audio_list = audio_list[10:]
+
+# Guruhdan musiqalarni yig'ish
+@router.message(F.chat.id == GROUP_CHAT_ID, F.audio)
+async def save_audio(message: Message):
+    global audio_list
+    audio_list.append(message.audio.file_id)
+    
+    # Ro'yxatni cheklash (masalan, 100 ta faylni saqlash)
+    if len(audio_list) > 100:
+        audio_list.pop(0)
