@@ -5,7 +5,7 @@ from keyboards.reply.send_musics import sending_musics
 from keyboards.reply.music_menu import music_category
 from keyboards.reply.main_menu import main_menu
 
-GROUP_CHAT_ID = "--1001829104884"  # Guruh ID ni kiriting
+GROUP_CHAT_ID = "-1001829104884"  # Guruh ID ni to'g'ri kiriting (masalan, '-100xxxxxxx')
 audio_list = []  # Guruhdan kelgan musiqalarni saqlash uchun ro'yxat
 
 # Musiqa kategoriyalari menyusi
@@ -34,7 +34,7 @@ async def send_all_musics(message: Message):
     audio_list = audio_list[10:]
 
 # Guruhdan musiqalarni yig'ish
-@router.message(F.chat.id == GROUP_CHAT_ID, F.audio)
+@router.message(F.chat.id == int(GROUP_CHAT_ID), F.audio)  # `GROUP_CHAT_ID` to'g'ri tipda bo'lishi kerak
 async def save_audio(message: Message):
     global audio_list
     audio_list.append(message.audio.file_id)
