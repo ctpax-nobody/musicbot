@@ -11,11 +11,19 @@ async def start(message: types.Message):
     fullname = message.from_user.full_name
     username = message.from_user.username
     try:
-        db.register_user(telegram_id, fullname, username)
-        await message.reply(
+        if username == True:
+            db.register_user(telegram_id, fullname, username)
+            await message.reply(
+                text=f"Assalomu aleykum, {fullname}, muvaffaqiyatli ro'yxatdan o'tdingiz ✅",
+                reply_markup=generate_main_menu()
+            )
+        else:
+            db.register_user2(telegram_id, fullname)
+            await message.reply(
             text=f"Assalomu aleykum, {fullname}, muvaffaqiyatli ro'yxatdan o'tdingiz ✅",
             reply_markup=generate_main_menu()
         )
+
     except Exception as e:
         await message.reply(
             text=f"Xush kelibsiz, {fullname} 🤝",

@@ -60,6 +60,13 @@ class Database:
 
         self.execute(sql, (telegram_id, fullname, username), commit=True)
 
+    def register_user2(self, telegram_id: int, fullname: str):
+        sql="""
+        INSERT INTO users (telegram_id, fullname)
+        VALUES(%s, %s)
+    """
+
+        self.execute(sql, (telegram_id, fullname), commit=True)
 
     # def create_categories_table(self) -> None:
     #     """
