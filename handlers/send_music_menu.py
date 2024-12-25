@@ -5,7 +5,7 @@ from keyboards.reply.send_musics import sending_musics
 from keyboards.reply.music_menu import music_category
 from keyboards.reply.main_menu import main_menu
 
-GROUP_CHAT_ID = "-1001234567890"  # Guruh ID ni kiriting
+GROUP_CHAT_ID = "--1001829104884"  # Guruh ID ni kiriting
 audio_list = []  # Guruhdan kelgan musiqalarni saqlash uchun ro'yxat
 
 # Musiqa kategoriyalari menyusi
