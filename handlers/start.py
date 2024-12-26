@@ -12,7 +12,6 @@ async def start(message: types.Message):
     username = message.from_user.username
 
     try:
-        # Agar bu guruhda bo'lsa
         if message.chat.type in ['group', 'supergroup']:
             group_id = message.chat.id
             await message.reply(
@@ -21,14 +20,14 @@ async def start(message: types.Message):
             )
 
         # Agar username bo'lsa, uni ro'yxatdan o'tkazish
-        if username:
-            db.register_user(telegram_id, fullname, username)
+        if username == False:
+            db.register_user2(telegram_id, fullname)
             await message.reply(
                 text=f"Assalomu aleykum, {fullname}, muvaffaqiyatli ro'yxatdan o'tdingiz ✅",
                 reply_markup=generate_main_menu()
             )
         else:
-            db.register_user2(telegram_id, fullname)
+            db.register_user(telegram_id, fullname, username)
             await message.reply(
                 text=f"Assalomu aleykum, {fullname}, muvaffaqiyatli ro'yxatdan o'tdingiz ✅",
                 reply_markup=generate_main_menu()
